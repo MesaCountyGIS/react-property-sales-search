@@ -1,8 +1,18 @@
+import 'core-js/fn/object/assign';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 import App from './components/App';
+import configureStore from './store/configureStore';
+import {fetchArchtype, fetchNeighborhood} from './actions/salesLookupActions';
+import {Provider} from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import './styles/index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = configureStore();
+
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>, document.getElementById('root')
+);
 registerServiceWorker();

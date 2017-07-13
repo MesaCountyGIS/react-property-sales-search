@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BufferFacet /> renders without crashing 1`] = `
+<div
+  style={
+    Object {
+      "border": "1px solid #ccc",
+      "borderRadius": "4px",
+      "boxShadow": "1px 1px 5px #888888",
+      "display": "block",
+      "height": "2.8em",
+      "marginBottom": "1em",
+      "padding": "0.5em 0 2em 1.5em",
+      "top": "0",
+      "width": "16em",
+    }
+  }
+>
+  <label
+    style={
+      Object {
+        "borderBottom": "1px solid #ccc",
+        "color": "#C4C4C4",
+        "display": "block",
+        "fontSize": "0.8em",
+        "fontWeight": "bold",
+        "margin": "0 0 0.4em 0",
+        "textAlign": "left",
+      }
+    }
+  >
+    Buffer
+  </label>
+  <div>
+    <span>
+      Enter Address or Parcel No.
+    </span>
+    <input
+      id="bufferString"
+      title="Enter Parcel Number or Address"
+      type="text"
+    />
+    <button
+      id="clear"
+      title="Clear the list"
+    >
+      Clear
+    </button>
+    <div
+      id="bufferdiv"
+    >
+      <label
+        for="buffer"
+      >
+        Buffer above entry
+      </label>
+      <input
+        id="buffer"
+        min="0"
+        name="buffer"
+        step=".25"
+        type="number"
+      />
+      <span>
+        miles
+      </span>
+    </div>
+  </div>
+</div>
+`;

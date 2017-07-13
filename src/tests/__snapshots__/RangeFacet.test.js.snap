@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RangeFacet /> renders without crashing 1`] = `
+<div
+  style={
+    Object {
+      "border": "1px solid #ccc",
+      "borderRadius": "4px",
+      "boxShadow": "1px 1px 5px #888888",
+      "display": "block",
+      "height": "2.8em",
+      "marginBottom": "1em",
+      "padding": "0.5em 0 2em 1.5em",
+      "top": "0",
+      "width": "90%",
+    }
+  }
+>
+  <label
+    style={
+      Object {
+        "borderBottom": "1px solid #ccc",
+        "color": "#C4C4C4",
+        "display": "block",
+        "fontSize": "0.8em",
+        "fontWeight": "bold",
+        "margin": "0 0 0.4em 0",
+        "textAlign": "left",
+      }
+    }
+  >
+    test range facet
+  </label>
+  <div
+    style={
+      Object {
+        "float": "left",
+        "fontSize": "0.8em",
+        "lineHeight": "1.1em",
+        "paddingRight": "1em",
+        "position": "relative",
+      }
+    }
+  >
+    <label
+      className="range"
+      style={
+        Object {
+          "display": "block",
+          "textAlign": "left",
+        }
+      }
+    >
+      test min label
+    </label>
+    <input
+      className="facet access"
+      onChange={[Function]}
+      step="test step"
+      style={
+        Object {
+          "width": "8em",
+        }
+      }
+      type="number"
+      value="test min value"
+    />
+  </div>
+  <div
+    style={
+      Object {
+        "float": "left",
+        "fontSize": "0.8em",
+        "lineHeight": "1.1em",
+        "paddingRight": "1em",
+        "position": "relative",
+      }
+    }
+  >
+    <label
+      className="range"
+      style={
+        Object {
+          "display": "block",
+          "textAlign": "left",
+        }
+      }
+    >
+      test max label
+    </label>
+    <input
+      className="facet access"
+      onChange={[Function]}
+      step="test step"
+      style={
+        Object {
+          "width": "8em",
+        }
+      }
+      type="number"
+      value="test max value"
+    />
+  </div>
+</div>
+`;

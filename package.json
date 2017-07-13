@@ -3,15 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "core-js": "^2.4.1",
+    "express": "^4.15.3",
     "moment": "^2.18.1",
+    "prop-types": "^15.5.10",
     "react": "^15.5.4",
+    "react-autosuggest": "^9.2.0",
     "react-datepicker": "^0.46.0",
     "react-dom": "^15.5.4",
-    "react-overlays": "^0.7.0",
-    "react-router-dom": "^4.1.1"
+    "react-modal": "^1.7.8",
+    "react-redux": "^5.0.5",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "^4.0.8",
+    "react-select": "^1.0.0-rc.5",
+    "redux": "^3.7.1",
+    "redux-thunk": "^2.2.0",
+    "seriate": "^0.9.0"
   },
   "devDependencies": {
-    "react-scripts": "1.0.7"
+    "enzyme": "^2.8.2",
+    "react-scripts": "1.0.7",
+    "react-test-renderer": "^15.6.1",
+    "redux-immutable-state-invariant": "^2.0.0",
+    "sinon": "^2.3.4"
   },
   "scripts": {
     "start": "react-scripts start",

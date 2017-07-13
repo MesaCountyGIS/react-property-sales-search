@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MoreFilters /> renders without crashing 1`] = `
+<div
+  onClick={[Function]}
+  style={
+    Object {
+      "cursor": "pointer",
+      "display": "inline-block",
+      "fontSize": "0.8em",
+      "fontWeight": "bold",
+      "marginTop": "1.35em",
+      "position": "absolute",
+    }
+  }
+>
+  test message
+  <span
+    style={
+      Object {
+        "float": "right",
+        "fontSize": "0.8em",
+        "marginLeft": "1em",
+        "marginTop": "0.1em",
+      }
+    }
+  >
+    ▼
+  </span>
+  <noscript />
+</div>
+`;

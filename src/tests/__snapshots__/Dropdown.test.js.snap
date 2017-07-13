@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dropdown /> renders without crashing 1`] = `
+<div
+  className="dropdown test-dropdown"
+  style={Object {}}
+>
+  Select Test Data
+  <span
+    className="dropdown test-dropdown"
+  >
+    ▼
+  </span>
+  <ul
+    className="drop-nav display"
+    onClick={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <li
+      className="heading"
+    >
+      Improved Sales
+    </li>
+    <li
+      className="item"
+    >
+      Agricultural
+    </li>
+    <li
+      className="item"
+    >
+      Commercial/Industrial
+    </li>
+    <li
+      className="item"
+    >
+      Agricultural Vacant
+    </li>
+  </ul>
+</div>
+`;

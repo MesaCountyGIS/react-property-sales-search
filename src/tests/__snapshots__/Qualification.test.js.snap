@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Qualification /> renders without crashing 1`] = `
+<div
+  className="qualification"
+  style={
+    Object {
+      "border": "1px solid #ccc",
+      "borderRadius": "4px",
+      "boxShadow": "1px 1px 5px #888888",
+      "display": "block",
+      "height": "2.8em",
+      "marginBottom": "1em",
+      "padding": "0.5em",
+      "top": "0",
+      "width": "75%",
+    }
+  }
+>
+  <label
+    style={
+      Object {
+        "borderBottom": "1px solid #ccc",
+        "color": "#C4C4C4",
+        "display": "block",
+        "fontSize": "0.8em",
+        "fontWeight": "bold",
+        "margin": "0 0 0.4em 0",
+        "textAlign": "left",
+      }
+    }
+  >
+    Sales Qualification Type
+  </label>
+  <div
+    className="dropdown qualification"
+    style={
+      Object {
+        "paddingLeft": "0 !important",
+        "width": "14.5em",
+      }
+    }
+  >
+    Qualified and Unqualified
+    <span
+      className="dropdown qualification"
+    >
+      ▼
+    </span>
+    <ul
+      className="drop-nav display"
+      onClick={[Function]}
+      style={
+        Object {
+          "display": "none",
+          "marginLeft": "-0.7em",
+          "marginTop": "0.9em",
+          "width": "15.5em",
+        }
+      }
+    >
+      <li
+        className="item"
+      >
+        Qualified
+      </li>
+      <li
+        className="item"
+      >
+        Unqualified
+      </li>
+      <li
+        className="item"
+      >
+        Qualified and Unqualified
+      </li>
+    </ul>
+  </div>
+</div>
+`;

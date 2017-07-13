@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Title /> renders without crashing 1`] = `
+<div
+  className="title"
+  style={
+    Object {
+      "fontSize": "0.65em",
+      "textAlign": "center",
+    }
+  }
+>
+  <h1>
+    Mesa County Assessor - Property Sales Search
+  </h1>
+  <h2>
+    Ken Brownlee, Assessor
+  </h2>
+  <div
+    id="resetPage"
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    Reset Search
+  </div>
+</div>
+`;

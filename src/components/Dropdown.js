@@ -1,66 +1,76 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../styles/Dropdown.css';
 
   class Dropdown extends Component {
       constructor(props){
           super(props);
           this.state = {
-              selected: props.value,
-              title: props.title || 'Select',
-              value: props.value || 'Select...',
-              display: false
+            //   value: props.value,
+              display: false,
+              listItems: props.option,
+              baseClass: props.baseclass
           };
-
-          this.showHide = this.showHide.bind(this);
-          this.selectNode = this.selectNode.bind(this);
       }
 
-componentDidMount(x){
+componentDidMount = (x) =>{
     document.addEventListener('click', this.showHide, false);
 }
 
-componentWillUnmount () {
+componentWillUnmount = () =>{
    document.removeEventListener('click', this.showHide, false)
  }
 
-selectNode(node) {
+selectNode = (node) =>{
     if (node.target.className !== 'heading') {
-        this.setState({value: node.target.innerHTML});
+        this.props.handleChange(node.target.innerHTML)
+        // this.setState({value: node.target.innerHTML});
     }
 }
 
-showHide(event) {
-    if (event.target.className === "dropdown") {
-        this.setState({isShown: !this.state.isShown});
-    } else if (event.target.className !== "dropdown" && event.target.className !== "heading" && this.state.isShown) {
-        this.setState({isShown: false});
+showHide = (event) =>{
+    if (event.target.className.indexOf(this.state.baseClass) > -1) {
+        this.setState({display: !this.state.display});
+    } else if (event.target.className.indexOf(this.state.baseClass) <= -1 &&
+        event.target.className !== "heading" &&
+        this.state.display) {
+        this.setState({display: false});
     }
 }
+
 
     render() {
+        //ulDisplay is outside of the ul style tag so it can be spread outside
+        //along with the customStyles.dropNav object
+        const ulDisplay = {
+            "display":this.state.display? "block":"none"
+        }
       return (
-          <div className='dropdown'>{this.state.value}<span className='dropdown'>&#9660;</span>
-              <ul style={{"display":this.state.isShown? "block":"none"}} className='drop-nav display' onClick={this.selectNode}>
-                  <li className="heading">Improved Sales</li>
-                  <li>Agricultural</li>
-                  <li>Commercial/Industrial</li>
-                  <li>Condo</li>
-                  <li>Duplex/Triplex</li>
-                  <li>Exempt</li>
-                  <li>Manufactured Home</li>
-                  <li>Multi Family 4 TO 8</li>
-                  <li>Multi Family 9 AND UP</li>
-                  <li>Single Family</li>
-                  <li>Townhouse</li>
-                  <li className="heading">Vacant Sales</li>
-                  <li>Agricultural Vacant</li>
-                  <li>Commercial/Industrial Vacant</li>
-                  <li>Exempt Vacant</li>
-                  <li>Residential Vacant</li>
+          <div style={{...this.props.customStyles.ulContainer}}
+              className={`dropdown ${this.state.baseClass}`}>{this.props.value}
+              <span className={`dropdown ${this.state.baseClass}`}>&#9660;</span>
+              <ul style={{...ulDisplay, ...this.props.customStyles.dropNav}}
+                  className='drop-nav display' onClick={this.selectNode}>
+                  {this.state.listItems.map(item =>{
+                      return <li key={item.value} className={item.type} >{item.value}</li>
+                  })}
               </ul>
           </div>
       );
     }
+  }
+
+  Dropdown.propTypes = {
+      value: PropTypes.string,
+      option: PropTypes.array.isRequired,
+      baseclass: PropTypes.string,
+      customStyles: PropTypes.object.isRequired
+  }
+
+  Dropdown.defaultProps = {
+      value: 'Select...',
+      baseclass: 'base-class',
+      customStyles: {dropdown:{},dropNav:{},ulContainer:{}}
   }
 
 

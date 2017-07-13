@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> renders without crashing 1`] = `
+<div
+  className="header"
+  style={
+    Object {
+      "backgroundColor": "#013E6B",
+      "color": "white",
+      "height": "100px",
+    }
+  }
+>
+  <a
+    href="http://www.mesacounty.us"
+  >
+    <img
+      alt="logo"
+      className="App-logo"
+      src="logo.jpg"
+      style={
+        Object {
+          "paddingTop": "0.15em",
+        }
+      }
+    />
+  </a>
+</div>
+`;
