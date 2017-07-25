@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import RangeFacetLabel from './RangeFacetLabel';
+import RangeBlock from './RangeBlock';
 import PropTypes from 'prop-types';
 
 const rangeFacetStyle = {
@@ -13,63 +14,41 @@ const rangeFacetStyle = {
     width: '90%',
     boxShadow: '1px 1px 5px #888888'
 }
-const rangeFacetLabelStyle = {
-    display: 'block',
-    fontSize: '0.8em',
-    fontWeight: 'bold',
-    color: '#C4C4C4',
-    margin: '0 0 0.4em 0',
-    textAlign:'left',
-    borderBottom: '1px solid #ccc'
-}
-
-const rangeBlock = {
-    position: "relative",
-    float: "left",
-    lineHeight: "1.1em",
-    paddingRight: "1em",
-    fontSize:"0.8em"
-}
-
-const inputStyle = {
-    width: "8em"
-}
 
   class RangeFacet extends Component {
       constructor(props){
           super(props)
-        //   this.state = {
-        //       minValue: this.props.minValue,
-        //       maxValue: this.props.maxValue
-        //   }
       }
 
       changeMin = (event) =>{
           this.props.onMinChange(event.target.value);
-        //   this.setState({
-        //       minValue: event.target.value
-        //   })
       }
       changeMax = (event) =>{
           this.props.onMaxChange(event.target.value);
-        //   this.setState({
-        //       maxValue: event.target.value
-        //   })
       }
+
     render() {
       return (
           <div style={rangeFacetStyle}>
-              <label style={rangeFacetLabelStyle}>{this.props.title}</label>
-              <div style={rangeBlock}>
-                  <label style={{"display":"block", "textAlign":"left"}} className='range'>{this.props.minLabel}</label>
-                  <input style={inputStyle} className='facet access' type='number' step={this.props.step} value={this.props.minValue}
-                      onChange={this.changeMin} />
-              </div>
-              <div style={rangeBlock}>
-                  <label style={{"display":"block", "textAlign":"left"}} className='range'>{this.props.maxLabel}</label>
-                  <input style={inputStyle} className='facet access' type='number' step={this.props.step} value={this.props.maxValue}
-                      onChange={this.changeMax} />
-              </div>
+
+              <RangeFacetLabel value={this.props.title} />
+
+              <RangeBlock
+                  labelText={this.props.minLabel}
+                  className="facet access"
+                  type="number"
+                  step={this.props.step}
+                  rangeValue={this.props.minValue}
+                  rangeChange={this.changeMin}
+              />
+              <RangeBlock
+                  labelText={this.props.maxLabel}
+                  className="facet access"
+                  type="number"
+                  step={this.props.step}
+                  rangeValue={this.props.maxValue}
+                  rangeChange={this.changeMax}
+              />
           </div>
       );
     }

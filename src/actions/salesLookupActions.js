@@ -54,11 +54,15 @@ export function updatePropertyUse(propertyUseList){
 }
 
 export function updateEconomicArea(economicAreaList){
-    return {type: actions.UPDATE_ECONOMIC_AREA, propertyUses: createOptionsList(economicAreaList)};
+    return {type: actions.UPDATE_ECONOMIC_AREA, economicAreas: createOptionsList(economicAreaList)};
 }
 
 export function updateNeighborhood(neighborhoodList){
-    return {type: actions.UPDATE_NEIGHBORHOOD, propertyUses: createOptionsList(neighborhoodList)};
+    return {type: actions.UPDATE_NEIGHBORHOOD, neighborhoods: createOptionsList(neighborhoodList)};
+}
+
+export function updateArchitecturalType(architecturalTypeList){
+    return {type: actions.UPDATE_ARCHITECTURAL_TYPE, architecturalTypes: createOptionsList(architecturalTypeList)};
 }
 
 export function updateRecordCountButtonSuccess(recordCount){
@@ -76,6 +80,16 @@ export function updateRecordCountButton(facetData){
         })
     }
 }
+
+export function updateBufferDistance(bufferDistance){
+    return {type: actions.UPDATE_BUFFER_DISTANCE, bufferDistance};
+}
+
+export function updateBufferAddress(bufferAddress){
+    return {type: actions.UPDATE_BUFFER_ADDRESS, bufferAddress};
+}
+
+
 
 //Helper functions
 function createOptionsList(options){

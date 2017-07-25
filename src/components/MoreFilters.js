@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-// import Qualification from './Qualification';
+import RangeFacetLabel from './RangeFacetLabel';
 import RangeFacet from './RangeFacet';
 import SelectFacet from './SelectFacet';
 import BufferFacet from './BufferFacet/BufferFacet';
@@ -74,7 +74,6 @@ const modalStyle = {
 
 const majorAreaStyle = {
     component:{
-        // 'float':'left',
         display:'inline-block',
         marginRight:'0.8em',
         'paddingTop':'1em',
@@ -164,15 +163,6 @@ const qualificationStyle = {
     width: '75%',
     boxShadow: '1px 1px 5px #888888'
 }
-const qualificationLabelStyle = {
-    display: 'block',
-    fontSize: '0.8em',
-    fontWeight: 'bold',
-    color: '#C4C4C4',
-    margin: '0 0 0.4em 0',
-    textAlign:'left',
-    borderBottom: '1px solid #ccc'
-}
 
 const customStyles = {
     dropNav: {
@@ -240,7 +230,7 @@ const customStyles = {
                   <div style={{...column, ...leftColumn}} className="leftColumn">
 
                       <div style={qualificationStyle} className="qualification">
-                          <label style={qualificationLabelStyle}>Sales Qualification Type</label>
+                          <RangeFacetLabel value="Sales Qualification Type" />
                           <Dropdown
                               baseclass='qualification'
                               customStyles={customStyles}
@@ -250,7 +240,6 @@ const customStyles = {
                               handleChange={this.props.actions.updateSalesQualification}
                           />
                       </div>
-                      {/* <Qualification /> */}
 
                       <RangeFacet
                           title='Sale Amount'
@@ -319,23 +308,28 @@ const customStyles = {
                           options={this.state.neighborhoodOptions}
                           defaultOption='Any'
                           customStyles={neighborhoodStyle}
+                          selected={this.props.neighborhoods}
+                          onChange={this.props.actions.updateNeighborhood}
                       />
-
-
                   </div>
-
-
 
                   <div style={{...column, ...rightColumn}} className="rightColumn">
 
-                      {/* <SelectFacet
+                      <SelectFacet
                           title='Building Architectural Type'
                           options={this.state.archTypeOptions}
                           defaultOption='Any'
                           customStyles={buildingTypeStyle}
-                      /> */}
+                          selected={this.props.architecturalTypes}
+                          onChange={this.props.actions.updateArchitecturalType}
+                      />
 
-                      <BufferFacet />
+                      <BufferFacet
+                          distance={this.props.bufferDistance}
+                          address={this.props.bufferAddress}
+                          updateDistance={this.props.actions.updateBufferDistance}
+                          updateAddress={this.props.actions.updateBufferAddress}
+                      />
 
 
                       <div style={buttonGroupStyle} className='buttonGroup'>
@@ -359,9 +353,8 @@ const customStyles = {
 
     const mapStateToProps = (state, ownProps)=>{
         return {
+            //Two other facets located in FacetsBar.js
             modalIsOpen: state.modalDisplay.modalIsOpen,
-            // minSaleDate: state.facets.minSaleDate,
-            // maxSaleDate: state.facets.maxSaleDate,
             qualificationType: state.facets.qualificationType,
             minSaleAmount: state.facets.minSaleAmount,
             maxSaleAmount: state.facets.maxSaleAmount,
@@ -373,8 +366,9 @@ const customStyles = {
             propertyUses: state.facets.propertyUses,
             economicAreas: state.facets.economicAreas,
             neighborhoods: state.facets.neighborhoods,
-            // archTypeOptions: state.facets.archTypeOptions,
-            // neighborhoodOptions: state.facets.neighborhoodOptions,
+            architecturalTypes: state.facets.architecturalTypes,
+            bufferDistance: state.facets.bufferDistance,
+            bufferAddress: state.facets.bufferAddress,
             recordCount: state.records.recordCount
         }
     }

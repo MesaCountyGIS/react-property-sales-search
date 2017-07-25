@@ -53,9 +53,9 @@ class FacetsBar extends Component {
   render() {
     return (
       <div style={facetsbar} className="facets-bar">
-        <Datepickers time={4} units={'months'}/>
-        <span style={dividerStyle}></span>
-        <Dropdown baseclass='more-filters' option={dropdownContent} placeholder='Select Property Type' value={this.props.propertyType} handleChange={this.props.actions.updatePropertyType}/>
+          <Datepickers time={4} units={'months'}/>
+          <span style={dividerStyle}></span>
+          <Dropdown baseclass='more-filters' option={dropdownContent} placeholder='Select Property Type' value={this.props.propertyType} handleChange={this.props.actions.updatePropertyType}/>
 
         <span style={dividerStyle}></span>
         <MoreFilters message={'More Filters'}/>
