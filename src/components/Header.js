@@ -8,7 +8,7 @@ const HeaderBackground = {
 const Header = () =>
   (
       <div style={HeaderBackground} className="header">
-          <a href="http://www.mesacounty.us"><img src={logo} className="App-logo" alt="logo" /></a>
+          <a href="http://www.mesacounty.us"><img src={logo} style={{"width":"100%"}} className="App-logo" alt="logo" /></a>
       </div>
   );
 

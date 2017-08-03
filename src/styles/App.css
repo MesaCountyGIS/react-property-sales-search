@@ -14,3 +14,7 @@ body {
 .App-intro {
   font-size: large;
 }
+
+.dataTable{
+  width:100% !important;
+}

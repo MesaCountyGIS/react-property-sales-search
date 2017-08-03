@@ -4,7 +4,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import RangeFacetLabel from './RangeFacetLabel';
 import RangeFacet from './RangeFacet';
-import SelectFacet from './SelectFacet';
+import SelectFacet from './selectFacet';
 import BufferFacet from './BufferFacet/BufferFacet';
 import Dropdown from './Dropdown';
 import {connect} from 'react-redux';
@@ -207,11 +207,7 @@ const customStyles = {
     }
 
     getCount = ()=>{
-        //data will be replaced by a prop showing object from state
-        const data = {
-            ACCOUNTNO: 'R05552'
-        }
-        this.props.actions.updateRecordCountButton(data)
+        this.props.actions.updateRecordCountButton(this.props.allState)
     }
 
       render() {
@@ -354,6 +350,7 @@ const customStyles = {
     const mapStateToProps = (state, ownProps)=>{
         return {
             //Two other facets located in FacetsBar.js
+            allState: state.facets,
             modalIsOpen: state.modalDisplay.modalIsOpen,
             qualificationType: state.facets.qualificationType,
             minSaleAmount: state.facets.minSaleAmount,

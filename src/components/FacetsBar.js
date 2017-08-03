@@ -47,9 +47,6 @@ const dropdownContent = [
 ]
 
 class FacetsBar extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div style={facetsbar} className="facets-bar">
@@ -57,8 +54,8 @@ class FacetsBar extends Component {
           <span style={dividerStyle}></span>
           <Dropdown baseclass='more-filters' option={dropdownContent} placeholder='Select Property Type' value={this.props.propertyType} handleChange={this.props.actions.updatePropertyType}/>
 
-        <span style={dividerStyle}></span>
-        <MoreFilters message={'More Filters'}/>
+          <span style={dividerStyle}></span>
+          <MoreFilters message={'More Filters'}/>
       </div>
     );
   }

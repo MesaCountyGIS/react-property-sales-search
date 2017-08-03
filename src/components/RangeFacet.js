@@ -16,10 +16,6 @@ const rangeFacetStyle = {
 }
 
   class RangeFacet extends Component {
-      constructor(props){
-          super(props)
-      }
-
       changeMin = (event) =>{
           this.props.onMinChange(event.target.value);
       }

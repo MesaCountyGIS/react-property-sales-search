@@ -26,10 +26,6 @@ const inputStyle = {
 }
 
   class SelectFacet extends Component {
-      constructor(props){
-          super(props)
-      }
-
       handleChange = (select) =>{
           this.props.onChange(select.target.options)
       }

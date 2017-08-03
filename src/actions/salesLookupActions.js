@@ -5,6 +5,14 @@ export function toggleModal(modalIsOpen){
     return {type: actions.TOGGLE_MODAL, modalIsOpen};
 }
 
+export function toggleStartMessage(startMessageIsOpen){
+    return {type: actions.TOGGLE_START_MESSAGE, startMessageIsOpen};
+}
+
+export function toggleTable(tableIsOpen){
+    return {type: actions.TOGGLE_TABLE, tableIsOpen};
+}
+
 export function updateMinSaleDate(minSaleDate){
     return {type: actions.UPDATE_MIN_SALE_DATE, minSaleDate};
 }
@@ -74,6 +82,22 @@ export function updateRecordCountButton(facetData){
         return axios.post('http://localhost:3000/query/count', facetData)
         .then(res => {
             dispatch(updateRecordCountButtonSuccess(res.data))
+        })
+        .catch(error => {
+            throw(error);
+        })
+    }
+}
+
+export function updateTableRecordsSuccess(recordCount){
+    return {type: actions.UPDATE_RECORDS_SUCCESS, recordCount};
+}
+
+export function updateTableRecords(facetData){
+    return function(dispatch){
+        return axios.post('http://localhost:3000/query/count', facetData)
+        .then(res => {
+            dispatch(updateTableRecordsSuccess(res.data))
         })
         .catch(error => {
             throw(error);

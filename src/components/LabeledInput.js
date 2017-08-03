@@ -19,7 +19,7 @@ const LabeledInput = props => (
             onChange={props.updateState}
         />
         <span
-            style={{"marginTop":"0.5em", "float":"left", "marginLeft":"1em", "marginTop":"0.3em"}}
+            style={{"float":"left", "marginLeft":"1em", "marginTop":"0.3em"}}
         >
             {props.labelAfter}
         </span>

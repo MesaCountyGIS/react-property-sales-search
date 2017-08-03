@@ -22,16 +22,13 @@ const datePickerStyle = {
 
 
   class Datepickers extends Component {
-      constructor(props){
-          super(props);
-      }
-
       componentWillMount(){
         this.props.actions.updateMinSaleDate(Moment().subtract(this.props.time, this.props.units));
         this.props.actions.updateMaxSaleDate(Moment());
       }
 
       handleChangeStart = date => {
+          console.log(date)
           this.props.actions.updateMinSaleDate(date);
         }
 

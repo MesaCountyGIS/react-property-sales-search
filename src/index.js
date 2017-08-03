@@ -3,7 +3,6 @@ import React from 'react';
 import {render} from 'react-dom';
 import App from './components/App';
 import configureStore from './store/configureStore';
-import {fetchArchtype, fetchNeighborhood} from './actions/salesLookupActions';
 import {Provider} from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import './styles/index.css';
