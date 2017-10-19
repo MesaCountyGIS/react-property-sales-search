@@ -52,7 +52,7 @@ class FacetsBar extends Component {
       <div style={facetsbar} className="facets-bar">
           <Datepickers time={4} units={'months'}/>
           <span style={dividerStyle}></span>
-          <Dropdown baseclass='more-filters' option={dropdownContent} placeholder='Select Property Type' value={this.props.propertyType} handleChange={this.props.actions.updatePropertyType}/>
+          <Dropdown baseclass='more-filters' option={dropdownContent} placeholder='Select Property Type' value={this.props.propertyType} handleChange={[this.props.actions.updatePropertyType]}/>
 
           <span style={dividerStyle}></span>
           <MoreFilters message={'More Filters'}/>
@@ -62,13 +62,16 @@ class FacetsBar extends Component {
 }
 
   FacetsBar.propTypes = {
+      // modalIsOpen: PropTypes.bool,
       actions: PropTypes.object.isRequired
   }
 
 
   const mapStateToProps = (state, ownProps)=>{
       return {
+          // modalIsOpen: state.modalDisplay.modalIsOpen,
           propertyType: state.facets.propertyType,
+          allState: state.facets
       }
   }
 

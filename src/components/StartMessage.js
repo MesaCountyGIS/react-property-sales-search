@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import LoadingSpinner from './LoadingSpinner';
 
 const startMessageStyles = {
+    display:"none",
     padding: "3em",
     textAlign: "center",
-    // width: "50em",
     border: "1px solid gray",
     margin: "2em auto",
     borderRadius: "7px",

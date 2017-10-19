@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import RangeFacetLabel from './RangeFacetLabel';
 import RangeBlock from './RangeBlock';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as salesLookupActions from '../actions/salesLookupActions';
 
 const rangeFacetStyle = {
     display: 'block',
@@ -17,10 +20,20 @@ const rangeFacetStyle = {
 
   class RangeFacet extends Component {
       changeMin = (event) =>{
-          this.props.onMinChange(event.target.value);
+          Promise.resolve(this.props.onMinChange(event.target.value))
+          .then(() => {
+              this.props.propertyType !== 'Select Property Type'?
+              this.props.actions.updateRecordCountButton(this.props.allState, this.props.recordCount, this.props.modalIsOpen):
+              window.alert(`Please select a property type`)
+          });
       }
       changeMax = (event) =>{
-          this.props.onMaxChange(event.target.value);
+          Promise.resolve(this.props.onMaxChange(event.target.value))
+          .then(() =>{
+              this.props.propertyType !== 'Select Property Type'?
+              this.props.actions.updateRecordCountButton(this.props.allState, this.props.recordCount, this.props.modalIsOpen):
+              window.alert(`Please select a property type`)
+          });
       }
 
     render() {
@@ -51,6 +64,7 @@ const rangeFacetStyle = {
   }
 
   RangeFacet.propTypes = {
+      modalIsOpen: PropTypes.bool.isRequired,
       title: PropTypes.string.isRequired,
       minLabel: PropTypes.string,
       maxLabel: PropTypes.string,
@@ -65,5 +79,19 @@ const rangeFacetStyle = {
       step: '1'
   }
 
+  const mapStateToProps = (state, ownProps)=>{
+      return {
+          allState: state.facets,
+          propertyType: state.facets.propertyType,
+          modalIsOpen: state.modalDisplay.modalIsOpen
+      }
+  }
 
-export default RangeFacet;
+  const mapDispatchToProps = (dispatch)=>{
+      return {
+          actions: bindActionCreators(salesLookupActions, dispatch)
+      }
+  }
+
+
+  export default connect(mapStateToProps, mapDispatchToProps)(RangeFacet);

@@ -22,9 +22,10 @@ const bufferFacetStyle = {
       distanceChanged = i =>{
           //if the address box is empty, show error popup to customer
           if(this.props.address === ""){
-             alert(`Please enter a parcel number or address above before trying to buffer.`);
+             window.confirm(`Please enter a parcel number or address above before trying to buffer.`);
          }else{
-             this.props.updateDistance(i.target.value)
+             Promise.resolve(this.props.updateDistance(i.target.value))
+             .then(() =>this.props.updateRecordCount(this.props.state));
          }
       }
 

@@ -57,7 +57,7 @@ const column = {
 
 const modalStyle = {
     overlay:{
-        top: 247,
+        top: '36%',
         left: '0',
         right: '0'
     },
@@ -180,8 +180,7 @@ const customStyles = {
         constructor(props){
             super(props);
             this.state = {
-                modalIsOpen: false,
-                // count: "0",
+                // modalIsOpen: false,
                 neighborhoodOptions: undefined,
                 archTypeOptions: undefined
             }
@@ -207,7 +206,29 @@ const customStyles = {
     }
 
     getCount = ()=>{
-        this.props.actions.updateRecordCountButton(this.props.allState)
+        if(this.props.propertyType !== 'Select Property Type'){
+        this.props.actions.updateRecordCountButton(this.props.allState, this.props.recordCount, this.props.modalIsOpen);
+    }else{
+        window.alert(`Please select a property type`)
+    }
+    }
+
+    // showTable = () =>{
+    //     window.alert('fee')
+    //     if(this.props.propertyType !== 'Select Property Type'){
+    //         this.props.actions.updateTableRecords(this.props.allState);
+    //         this.toggleModal();
+    // }else{
+    //     window.alert(`Please select a property type`)
+    // }
+    // }
+
+    getRecs = () =>{
+        window.alert('pig')
+        console.log('EEEE1E');
+        // this.props.actions.updateTableRecords(this.props.allState);
+        // console.log('EEEEE2', this.props.recordData);
+
     }
 
       render() {
@@ -233,7 +254,7 @@ const customStyles = {
                               option={qualificationContent}
                               placeholder='Qualified and Unqualified'
                               value={this.props.qualificationType}
-                              handleChange={this.props.actions.updateSalesQualification}
+                              handleChange={[this.props.actions.updateSalesQualification]}
                           />
                       </div>
 
@@ -323,13 +344,17 @@ const customStyles = {
                       <BufferFacet
                           distance={this.props.bufferDistance}
                           address={this.props.bufferAddress}
+                          state={this.props.allState}
                           updateDistance={this.props.actions.updateBufferDistance}
                           updateAddress={this.props.actions.updateBufferAddress}
+                          updateRecordCount={this.props.actions.updateRecordCountButton}
                       />
 
 
                       <div style={buttonGroupStyle} className='buttonGroup'>
-                          <button style={buttonStyle} onClick={this.getCount}>View {this.props.recordCount} records</button>
+                          {/* <button style={buttonStyle} onClick={this.getRecs}>View {this.props.recordCount} records</button> */}
+                          <button style={buttonStyle} onClick={this.getCount}>View {this.props.recordCount.length} records</button>
+                          {/* <button style={buttonStyle} onClick={this.getRecs}>View {this.props.recordCount} records</button> */}
                           <button style={buttonStyle} onClick={this.toggleModal}>Cancel</button>
                       </div>
                   </div>
@@ -341,7 +366,7 @@ const customStyles = {
     }
 
     MoreFilters.propTypes = {
-        modalIsOpen: PropTypes.bool.isRequired,
+        modalIsOpen: PropTypes.bool,
         recordCount: PropTypes.string.isRequired,
         actions: PropTypes.object.isRequired
     }
@@ -351,6 +376,7 @@ const customStyles = {
         return {
             //Two other facets located in FacetsBar.js
             allState: state.facets,
+            propertyType: state.facets.propertyType,
             modalIsOpen: state.modalDisplay.modalIsOpen,
             qualificationType: state.facets.qualificationType,
             minSaleAmount: state.facets.minSaleAmount,
@@ -366,7 +392,8 @@ const customStyles = {
             architecturalTypes: state.facets.architecturalTypes,
             bufferDistance: state.facets.bufferDistance,
             bufferAddress: state.facets.bufferAddress,
-            recordCount: state.records.recordCount
+            recordCount: state.records.recordCount,
+            recordData: state.records.recordData
         }
     }
 

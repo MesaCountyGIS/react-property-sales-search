@@ -73,38 +73,6 @@ export function updateArchitecturalType(architecturalTypeList){
     return {type: actions.UPDATE_ARCHITECTURAL_TYPE, architecturalTypes: createOptionsList(architecturalTypeList)};
 }
 
-export function updateRecordCountButtonSuccess(recordCount){
-    return {type: actions.UPDATE_COUNT_SUCCESS, recordCount};
-}
-
-export function updateRecordCountButton(facetData){
-    return function(dispatch){
-        return axios.post('http://localhost:3000/query/count', facetData)
-        .then(res => {
-            dispatch(updateRecordCountButtonSuccess(res.data))
-        })
-        .catch(error => {
-            throw(error);
-        })
-    }
-}
-
-export function updateTableRecordsSuccess(recordCount){
-    return {type: actions.UPDATE_RECORDS_SUCCESS, recordCount};
-}
-
-export function updateTableRecords(facetData){
-    return function(dispatch){
-        return axios.post('http://localhost:3000/query/count', facetData)
-        .then(res => {
-            dispatch(updateTableRecordsSuccess(res.data))
-        })
-        .catch(error => {
-            throw(error);
-        })
-    }
-}
-
 export function updateBufferDistance(bufferDistance){
     return {type: actions.UPDATE_BUFFER_DISTANCE, bufferDistance};
 }
@@ -113,7 +81,42 @@ export function updateBufferAddress(bufferAddress){
     return {type: actions.UPDATE_BUFFER_ADDRESS, bufferAddress};
 }
 
+export function updateRecordCountButtonSuccess(recordCount){
+    return {type: actions.UPDATE_COUNT_SUCCESS, recordCount};
+}
 
+export function updateTableRecordsSuccess(recordData){
+    return {type: actions.UPDATE_RECORDS_SUCCESS, recordData};
+}
+
+export function updateRecordCountButton(facetData, accounts, modalIsOpen){
+    return function(dispatch){
+        axios.post('http://localhost:3000/query/count', {facetData, accounts, modalIsOpen})
+        .then(res => {
+            dispatch(updateTableRecordsSuccess(res.data))
+            dispatch(updateRecordCountButtonSuccess(res.data.map(x=>x.ACCOUNTNO)))
+        })
+        .catch(error => {
+            throw(error);
+        })
+    }
+}
+
+// export function updateTableRecordsSuccess(recordData){
+//     return {type: actions.UPDATE_RECORDS_SUCCESS, recordData};
+// }
+//
+// export function updateTableRecords(facetData){
+//     return function(dispatch){
+//         return axios.post('http://localhost:3000/query/records', facetData)
+//         .then(res => {
+//             dispatch(updateTableRecordsSuccess(res.data))
+//         })
+//         .catch(error => {
+//             throw(error);
+//         })
+//     }
+// }
 
 //Helper functions
 function createOptionsList(options){

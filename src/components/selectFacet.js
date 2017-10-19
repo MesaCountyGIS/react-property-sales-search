@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as salesLookupActions from '../actions/salesLookupActions';
 
 const selectFacetStyle = {
     'display': 'block',
@@ -27,7 +29,12 @@ const inputStyle = {
 
   class SelectFacet extends Component {
       handleChange = (select) =>{
-          this.props.onChange(select.target.options)
+          Promise.resolve(this.props.onChange(select.target.options))
+          .then(() =>{
+              this.props.propertyType !== 'Select Property Type'?
+              this.props.actions.updateRecordCountButton(this.props.allState):
+              window.alert(`Please select a property type`)
+          });
       }
 
 
@@ -56,4 +63,17 @@ const inputStyle = {
       customStyles: {component:{},select:{}}
   }
 
-export default SelectFacet;
+  const mapStateToProps = (state, ownProps)=>{
+      return {
+          allState: state.facets,
+          propertyType: state.facets.propertyType
+      }
+  }
+
+  const mapDispatchToProps = (dispatch)=>{
+      return {
+          actions: bindActionCreators(salesLookupActions, dispatch)
+      }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectFacet);

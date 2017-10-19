@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Dropdown.css';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as salesLookupActions from '../actions/salesLookupActions';
 
   class Dropdown extends Component {
       constructor(props){
           super(props);
           this.state = {
-            //   value: props.value,
               display: false,
               listItems: props.option,
               baseClass: props.baseclass
@@ -23,8 +25,8 @@ componentWillUnmount = () =>{
 
 selectNode = (node) =>{
     if (node.target.className !== 'heading') {
-        this.props.handleChange(node.target.innerHTML)
-        // this.setState({value: node.target.innerHTML});
+        Promise.resolve(this.props.handleChange[0](node.target.innerHTML))
+        .then(() => this.props.actions.updateRecordCountButton(this.props.allState, this.props.recordCount, this.props.modalIsOpen));//getCount() from MoreFilters.js
     }
 }
 
@@ -74,4 +76,40 @@ showHide = (event) =>{
   }
 
 
-export default Dropdown;
+// export default Dropdown;
+
+
+
+const mapStateToProps = (state, ownProps)=>{
+    return {
+        //Two other facets located in FacetsBar.js
+        allState: state.facets,
+        // propertyType: state.facets.propertyType,
+        modalIsOpen: state.modalDisplay.modalIsOpen,
+        // qualificationType: state.facets.qualificationType,
+        // minSaleAmount: state.facets.minSaleAmount,
+        // maxSaleAmount: state.facets.maxSaleAmount,
+        // minAcreage: state.facets.minAcreage,
+        // maxAcreage: state.facets.maxAcreage,
+        // minSquareFeet: state.facets.minSquareFeet,
+        // maxSquareFeet: state.facets.maxSquareFeet,
+        // majorAreas: state.facets.majorAreas,
+        // propertyUses: state.facets.propertyUses,
+        // economicAreas: state.facets.economicAreas,
+        // neighborhoods: state.facets.neighborhoods,
+        // architecturalTypes: state.facets.architecturalTypes,
+        // bufferDistance: state.facets.bufferDistance,
+        // bufferAddress: state.facets.bufferAddress,
+        recordCount: state.records.recordCount,
+        // recordData: state.records.recordData
+    }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        actions: bindActionCreators(salesLookupActions, dispatch)
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dropdown);

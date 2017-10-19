@@ -1,9 +1,16 @@
 import * as actions from '../actions/actionTypes';
 
-export default function recordReducer(state = {recordCount: 0}, action){
+const recordState = {
+    recordCount:[],
+    recordData: {}
+}
+
+export default function recordReducer(state = recordState, action){
     switch (action.type) {
       case actions.UPDATE_COUNT_SUCCESS:
         return Object.assign({}, state, {recordCount: action.recordCount});
+    case actions.UPDATE_RECORDS_SUCCESS:
+      return Object.assign({}, state, {recordData: action.recordData});
       default:
         return state;
     }
