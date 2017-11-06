@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import DataTable from 'datatables.net';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as salesLookupActions from '../actions/salesLookupActions';
 
 const columns = [
     {title: "Parcel Number (Click for map)"},
@@ -11,24 +14,26 @@ const columns = [
     {title: "Sale Date"},
     {title: "Grantee"},
     {title: "Grantor"},
-    // {title: "Actual Value"},
-    // {title: "Qualification Code"},
-    // {title: "Vacant Code"},
-    // {title: "Neighborhood"},
-    // {title: "Economic Area"},
-    // {title: "Property Use"},
-    // {title: "Total Heated Sq Ft"},
-    // {title: "Price by Heated SQFT"},
-    // {title: "Aprox. Acres"},
-    // {title: "Architectual Style 1st Building"},
-    // {title: "Total # Buildings"},
-    // {title: "Earliest Effective Year Built"}
+    {title: "Actual Value"},
+    {title: "Qualification Code"},
+    {title: "Vacant Code"},
+    {title: "Neighborhood"},
+    {title: "Economic Area"},
+    {title: "Property Use"},
+    {title: "Total Heated Sq Ft"},
+    {title: "Price by Heated SQFT"},
+    {title: "Aprox. Acres"},
+    {title: "Architectual Style 1st Building"},
+    {title: "Total # Buildings"},
+    {title: "Earliest Effective Year Built"}
 ];
 
 const dataSet = [
-    ["2458-254-14-125", "R05222", "125478", "584 Sunny Meadow Lane", "$360000", "10/15/17", "Some Guy", "Me"],
-    ["2458-254-14-124", "R04422", "125478", "584 Another St", "$400000", "10/15/17", "Some Other Guy", "Me"]
+    {"parcel": "2458-254-14-125", "account": "R05223", "reception": "125478", "address":"584 Sunny Meadow Lane","price": "$360000","date": "10/15/17","grantor": "Me","grantee": "you"},
+    {"parcel": "2458-254-14-125", "account": "R05223", "reception": "125478", "address":"584 Sunny Meadow Lane","price": "$360000","date": "10/15/17","grantor": "Me","grantee": "you"}
 ];
+
+// const dataSet = [];
 
 
   class Table extends Component {
@@ -40,7 +45,21 @@ const dataSet = [
           }
       }
 
+      // componentWillMount(){
+      //     let myList2 = "(N'";
+      //
+      //       for (i = 0; i < len; i++) {
+      //           myList2 += (data[i][1] + "', N'");
+      //           data[i][0] = "<a href='http://emap.mesacounty.us/viewer/?maptype=propsales&amp;ACCOUNTNO=" + data[i][1] + "' target='_blank'>" + data[i][0] + "</a>";
+      //           data[i][1] = "<a href='http://emap.mesacounty.us/assessor_lookup/Assessor_Parcel_Report.aspx?Account=" + data[i][1] + "' target='_blank'>" + data[i][1] + "</a>";
+      //           data[i][2] = "<a href='https://recording.mesacounty.us/Landmarkweb//search/DocumentBy?ClerkFileNumber=" + data[i][2] + "' target='_blank'>" + data[i][2] + "</a>";
+      //           table.row.add(data[i]);
+      //       }
+      //       myList2 = myList2.slice(0, -4) + ")";
+      // }
+
       componentDidMount() {
+          console.log(11, this.props.propertyType)
         $(this.refs.main).DataTable({
            dom: '<"data-table-wrapper"t>',
            data: dataSet, columns,
@@ -62,36 +81,44 @@ const dataSet = [
           <div>
               <table ref="main" />
           </div>
-        //   <table style={{"display": this.state.isShown?"block": "none"}} id="table" className="row-border hover">
-        //       <thead>
-        //           <tr>
-        //               <th>Parcel Number (Click for map)</th>
-        //               <th>Account Number (Click for details)</th>
-        //               <th>Reception No./Book Page (Click for Doc.)</th>
-        //               <th>Address</th>
-        //               <th>Sale Price</th>
-        //               <th>Sale Date</th>
-        //               <th>Grantee</th>
-        //               <th>Grantor</th>
-        //               <th>Actual Value</th>
-        //               <th>Qualification Code</th>
-        //               <th>Vacant Code</th>
-        //               <th>Neighborhood</th>
-        //               <th>Economic Area</th>
-        //               <th>Property Use</th>
-        //               <th>Total Heated Sq Ft</th>
-        //               <th>Price by Heated SQFT</th>
-        //               <th>Aprox. Acres</th>
-        //               <th>Architectual Style 1st Building</th>
-        //               <th>Total # Buildings</th>
-        //               <th>Earliest Effective Year Built</th>
-        //           </tr>
-        //       </thead>
-        //       <tbody></tbody>
-        //   </table>
       );
     }
   }
 
+  const mapStateToProps = (state, ownProps)=>{
+      return {
+          //Two other facets located in FacetsBar.js
+          allState: state.facets,
+          propertyType: state.facets.propertyType,
+          modalIsOpen: state.modalDisplay.modalIsOpen,
+          tableIsOpen: state.modalDisplay.tableIsOpen,
+          qualificationType: state.facets.qualificationType,
+          minSaleAmount: state.facets.minSaleAmount,
+          maxSaleAmount: state.facets.maxSaleAmount,
+          minAcreage: state.facets.minAcreage,
+          maxAcreage: state.facets.maxAcreage,
+          minSquareFeet: state.facets.minSquareFeet,
+          maxSquareFeet: state.facets.maxSquareFeet,
+          majorAreas: state.facets.majorAreas,
+          propertyUses: state.facets.propertyUses,
+          economicAreas: state.facets.economicAreas,
+          neighborhoods: state.facets.neighborhoods,
+          architecturalTypes: state.facets.architecturalTypes,
+          bufferDistance: state.facets.bufferDistance,
+          bufferAddress: state.facets.bufferAddress,
+          recordCount: state.records.recordCount,
+          recordData: state.records.recordData
+      }
+  }
 
-export default Table;
+  const mapDispatchToProps = (dispatch)=>{
+      return {
+          actions: bindActionCreators(salesLookupActions, dispatch)
+      }
+  }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
+
+
+// export default Table;
